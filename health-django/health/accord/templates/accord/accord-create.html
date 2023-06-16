@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>Accord</title>
+{% endblock head %} {% block content %}
+
+<div class="register-container">
+  <h1>Créer un accord</h1>
+  {% if pending_ask %}
+  <a>Les médecins suivant ont demandés accès à votre dossier</a>
+  <ul>
+    {% for ask in pending_ask %}
+    <li><a href="{% url 'accord-update' doctor_id=ask.doctor_id %}">{{ ask.doctor.first_name }}
+        {{ ask.doctor.last_name }}
+        ({{ ask.doctor.email }})</a>
+      <form action="{% url 'accord-request-delete' ask.doctor_id %}" style="display:inline;" method="post">
+        {% csrf_token %}
+        <button name="delete" value="upvote">Supprimer la demande</button>
+      </form>
+
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <a>Liste des médecins</a>
+  <ul>
+    {% for user in doctors %}
+    <li><a href="{% url 'accord-update' doctor_id=user.id %}">{{ user.first_name }} {{ user.last_name }}
+        ({{ user.email}})</a></li>
+    {% endfor %}
+  </ul>
+</div>
+<script src="{% static 'accord.js' %}"></script>
+{% endblock content %}

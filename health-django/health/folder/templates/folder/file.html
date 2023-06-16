@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>Home</title>
+<script src="{% static 'file.js' %}"></script>
+{% endblock head %} {% block content %}
+{% if accord %}
+<input id="accord" type="hidden" value="{{ accord.protected_symetric_key }}" />
+{% endif %}
+
+<h1>Check a file</h1>
+<div class="file-read">
+  <label for="id_name">Title:</label>
+  <input type="text" id="id_name" disabled value="{{ file.name }}" />
+  <label for="id_content">Content:</label>
+  <textarea id="id_content" disabled>{{ file.content }}</textarea>
+</div>
+
+<script>
+  decryptFile()
+</script>
+{% endblock content %}

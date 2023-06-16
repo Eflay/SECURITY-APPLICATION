@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Login</title>
+{% endblock head %}
+
+{% block content %}
+<h1>Login</h1>
+{% include 'messages.html' %}
+<form class="form-to-complete" method="POST" id="loginForm">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input class="btn-primary" type="submit" value="Login" />
+</form>
+<span class="not-registered">Not registered ? <a href="{% url 'register' %}">Register now !</a></span>
+<script src="{% static 'login.js' %}"></script>
+{% endblock content %}

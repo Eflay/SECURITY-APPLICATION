@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>File</title>
+<script src="{% static 'file.js' %}"></script>
+<script src="{% static 'encryptFolder.js' %}"></script>
+<script src="{% static 'signFile.js' %}"></script>
+{% endblock head %} {% block content %}
+
+<h1>Delete a file</h1>
+{% if accord %}
+<input id="accord" type="hidden" value="{{ accord.protected_symetric_key }}" />
+{% endif %}
+
+<p>Are you sure you want to delete this file?</p>
+<form id="sign-form" class="form-to-complete" method="post" novalidate>
+  {{form.name.label_tag}}
+  {{ form.name }}
+  {{form.content.label_tag}}
+  {{ form.content }}
+  {{ form.patient_sign.as_hidden }}
+  {{ form.doctor_sign.as_hidden }}
+  {% csrf_token %}
+  <script>
+    // Fonction pour désactiver le champ name
+
+    document.getElementById("id_name").disabled = true;
+  </script>
+  <input class="btn-primary" type="submit" onclick="encryptFolder('{{ user.role }}')" value="Delete" />
+  <a href="{% url 'home' %}">Retour</a>
+</form>
+
+<script>
+  decryptFile()
+</script>
+{% endblock content %}

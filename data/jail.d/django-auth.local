@@ -1,0 +1,10 @@
+[django-auth]
+enabled  = true
+chain = DOCKER-USER
+filter   = django-auth
+banaction = iptables-allports
+logpath  = /var/log/django/health.log
+maxretry = 3
+# 24h
+bantime  = 86400
+findtime = 3600

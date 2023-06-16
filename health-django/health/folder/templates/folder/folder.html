@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %} {% load static %}
+<title>Folder</title>
+{% endblock head %}
+
+{% block content %}
+
+{% if user.role == "PATIENT" %}
+<h1>My Folder </h1>
+{% endif %}
+{% if user.role == "DOCTOR" %}
+<h1> Folder patient {{ folder.patient.last_name }} {{ folder.patient.first_name }} </h1>
+{% endif %}
+<a class="btn-primary" href="{% url 'file-create' pat_id=folder.patient.id %}">Add a new file</a>
+{% if accord %}
+<input id="accord" type="hidden" value="{{ accord.protected_symetric_key }}" />
+{% endif %}
+<div class="subsection">
+    <h2>Approved files:</h2>
+    {% for file in files %}
+    {% if file.patient_sign != null %}
+    <div class="approved-file">
+        <p class="filename-title">{{file.name}}</p>
+        <div class="btn-group">
+            <a class="btn-secondary" href="{% url 'show_file' id=file.id %}">Check</a>
+            <a class="btn-secondary" href="{% url 'file-delete' id=file.id %}">Delete</a>
+            <a class="btn-secondary" href="{% url 'file-modify' id=file.id %}">Change</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor%}
+</div>
+{% if user.role == "PATIENT" %}
+{% for pendingfile in pendingfiles %}
+{% if pendingfile.action == 'delete' %}
+<h2>Waiting to delete :</h2>
+{% elif pendingfile.action == 'create' %}
+<h2>Waiting to create :</h2>
+{% else %}
+<h2>Waiting to modify :</h2>
+{% endif %}
+<p class="filename-title">{{ pendingfile.name }}</p>
+<a href="{% url 'file-sign' id=pendingfile.id %}">Vérifier</a>
+
+{% endfor %}
+{% endif %}
+<script src="{% static 'folder.js' %}"></script>
+{% endblock content %}

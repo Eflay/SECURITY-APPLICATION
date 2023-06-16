@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    {% block head %}{% endblock head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.all.min.js"
+        integrity="sha512-y8oWKnULY59b/Ce+mlekagFu+2M1R4FCPoQvG1Gvgp5mpM3UiTAQZY/3ai91gE0IW8/yk76JojiUkRlUP59F0Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'crypto.js' %}"></script>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <nav class="header-logged">
+        <div class="header-logged-left">
+            <a class="header-logged-btn" href="{% url 'home' %}">Home</a>
+        </div>
+        <div class="header-logged-right">
+            <span class="header-logged-user">Logged as: {{ request.user.email }}</span>
+            <a class="header-logged-btn" onclick="sessionStorage.clear()" href="{% url 'logout' %}">Log Out</a>
+            <a class="header-logged-btn" href="{% url 'change_password' %}"> Change Password </a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="app-container">
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+
+</html>

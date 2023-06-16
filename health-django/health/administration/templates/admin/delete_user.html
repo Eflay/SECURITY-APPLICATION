@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<title>Home</title>
+{% endblock head %}
+
+{% block content %}
+
+<h1>User Management</h1>
+
+{% if user.is_authenticated %}
+<h2> Delete user </h2>
+{% if patients %}
+<form method="post">
+    {% csrf_token %}
+    {% for patient in patients %}
+    <li><a href="{% url 'patient-ask-delete' pat_id=patient.id %}">{{ patient.first_name }} {{ patient.last_name }}
+        ({{ patient.email}})</a></li>
+    </p>
+    {% endfor%}
+    <input type="submit" value="submit">
+</form>
+
+{% else %}
+<p> No user </p>
+{% endif %}
+{% endif %}
+
+
+{% endblock content %}

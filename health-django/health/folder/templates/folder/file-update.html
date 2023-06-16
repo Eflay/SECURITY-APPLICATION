@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>File</title>
+<script src="{% static 'encryptFolder.js' %}"></script>
+<script src="{% static 'file.js' %}"></script>
+<script src="{% static 'signFile.js' %}"></script>
+{% endblock head %} {% block content %}
+
+<h1>Edit a file</h1>
+{% if accord %}
+<input id="accord" type="hidden" value="{{ accord.protected_symetric_key }}" />
+{% endif %}
+
+<form id="sign-form" class="form-to-complete" method="post" novalidate>
+  {{form.name.label_tag }} {{ form.name }} {{ form.content.label_tag }} {{ form.content }} {{ form.patient_sign.as_hidden }} {{ form.doctor_sign.as_hidden }} {% csrf_token %}
+  <input
+    type="submit"
+    class="btn-primary"
+    onclick="return encryptFolder('{{user.role}}');"
+    value="Change"
+  />
+</form>
+
+<script>
+  decryptFile();
+</script>
+{% endblock content %}

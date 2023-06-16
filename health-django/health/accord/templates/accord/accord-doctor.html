@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>Accord</title>
+{% endblock head %} {% block content %}
+
+{% include 'messages.html' %}
+
+<div class="register-container">
+  <h1>Accord</h1>
+  <form action="#" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<script src="{% static 'accord.js' %}"></script>
+{% endblock content %}

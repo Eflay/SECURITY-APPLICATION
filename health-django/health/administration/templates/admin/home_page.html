@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock head %}
+
+{% block content %}
+
+<h1>Home</h1>
+
+{% if user.is_authenticated %}
+<h2> Activate doctor account</h2>
+{% if doctors %}
+<form method="post">
+    {% csrf_token %}
+    {% for doctor in doctors %}
+    <p>Dr {{doctor.last_name}} {{doctor.first_name}} ({{doctor.email}})
+        <input type="checkbox" name="doctor" {% if doctor.enabled %} checked="checked" {% endif %}
+            value={{doctor.email}}>
+    </p>
+    {% endfor%}
+    <input type="submit" value="submit">
+</form>
+
+{% else %}
+<p> No new doctor </p>
+{% endif %}
+
+<a class="btn-secondary" href="{% url 'revoke_page' %}">Revoke Doctor</a>
+<a class="btn-secondary" href="{% url 'delete_user' %}">Delete Patient</a>
+
+{% endif %}
+{% endblock content %}

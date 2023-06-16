@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block head %}
+<title>Home</title>
+{% endblock head %} {% block content %}
+{% if user.is_authenticated %}
+{% if user.role == "DOCTOR" %}
+<h1>My patients</h1>
+{% endif %}
+{% if user.role == "PATIENT" %}
+<h1>My Doctor</h1>
+{% endif %}
+{% if user.role == "DOCTOR" %}
+{% for patient in patients %}
+<p>
+  Patient : {{ patient.patient.last_name }} {{ patient.patient.first_name }}
+  <input type="hidden" name="patient" value="{{ patient.patient.email }}" />
+  <a href="{% url 'folder' pat_id=patient.patient.id %}">Check folder</a>
+<form action="{% url 'accord-ask-delete' patient.patient.id %}" style="display:inline;" method="post">
+  {% csrf_token %}
+  <input class="btn-secondary" type="submit" name="delete" value="Ask to delete agreement" />
+</form>
+</p>
+{% endfor%}
+{% endif %}
+{%if user.role == "PATIENT" %}
+{% for doc in doctors %}
+
+<form class="mydoctor-doctor" action="{% url 'accord-delete' doc.doctor_id %}" method="post">
+  <div class="doctor-name">Dr. {{ doc.doctor.last_name }} {{ doc.doctor.first_name }}</div>
+  {% csrf_token %}
+  <input class="btn-secondary" type="submit" name="delete" value="Delete agreement" />
+</form>
+
+{% endfor%}
+
+{% endif %}
+{% endif %}
+{% endblock content %}

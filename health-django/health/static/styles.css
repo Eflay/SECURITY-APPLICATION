@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600");
+
+
+/* ##########################
+   #       APP STYLE
+   ########################## */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #DCDCDC;
+  margin: 100px;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.app-container {
+  background-color: white;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 4px;
+}
+
+.subsection {
+  margin-top: 50px;
+}
+
+.subsection:first-child {
+  margin-top: 0px;
+}
+
+textarea {
+  resize: none;
+}
+
+
+/* ##########################
+   #       TITLE STYLE
+   ########################## */
+
+h1 {
+  color: #3498db;
+  margin-top: 0px;
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: #000000;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+
+/* ##########################
+   #       LINK STYLE
+   ########################## */
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+
+/* ##########################
+   #      BUTTON STYLE
+   ########################## */
+
+.btn-primary {
+  border: 2px solid #3498db;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  border: 2px solid #3498db;
+  background-color: transparent;
+  color: #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+
+/* ##########################
+   #    HEADER APP STYLE
+   ########################## */
+
+.header-logged {
+  background-color: #3498db;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-logged-left, .header-logged-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logged .header-logged-user {
+  display: block;
+  margin-right: 10px;
+}
+
+.header-logged .header-logged-btn {
+  border: 2px solid #3498db;
+  background-color: #ffffff;
+  color: #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* ##########################
+   #  FORM TO COMPLETE STYLE
+   ########################## */
+
+.form-to-complete input,
+.form-to-complete label,
+.form-to-complete button,
+.form-to-complete select {
+  display: block;
+}
+
+.form-to-complete label {
+  margin-top: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-weight: 16px;
+  padding-bottom: 10px;
+}
+
+
+.form-to-complete input[type="text"],
+.form-to-complete input[type="email"],
+.form-to-complete input[type="password"],
+.form-to-complete select,
+.form-to-complete textarea {
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.form-to-complete:first-child {
+  margin-top: 0px;
+}
+
+.form-to-complete input[type="submit"],
+.form-to-complete button {
+  margin: auto;
+  margin-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+
+
+
+.menu .btn-secondary {
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.menu .menu-btn {
+  border: 2px solid #3498db;
+  background-color: transparent;
+  color: #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+
+/* ##########################
+   # /FOLDER/<ID> (folder.html)
+   ########################## */
+
+   .approved-file {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    border:2px solid #3498db;
+    padding: 20px;
+  }
+  
+  .approved-file:last-child {
+    margin-bottom: 0px;
+  }
+  
+  .approved-file .filename-title {
+    margin: 0px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .approved-file .btn-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .approved-file .btn-group .btn-priamry,
+  .approved-file .btn-group .btn-secondary {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .approved-file .btn-group .btn-priamry:first-child,
+  .approved-file .btn-group .btn-secondary:first-child {
+    margin-left: 0px;
+  }
+  
+  .approved-file .btn-group .btn-priamry:last-child,
+  .approved-file .btn-group .btn-secondary:last-child {
+    margin-right: 0px;
+  }
+
+
+/* ##########################
+   # /FILE/<ID> (file.html)
+   ########################## */
+
+.file-read input,
+.file-read label {
+  display: block;
+}
+
+.file-read label {
+  margin-top: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-weight: 16px;
+  padding-bottom: 10px;
+}
+
+
+.file-read input[type="text"],
+.file-read textarea {
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+}
+
+
+/* ##########################
+   # /PATIENT (patient.html)
+   ########################## */
+
+.mydoctor-doctor {
+  border:2px solid #3498db;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.mydoctor-doctor:last-child {
+  margin-bottom: 0px;
+}
+
+
+.mydoctor-doctor .doctor-name {
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+/* ##########################
+   #      MEDIAQUERIES
+   ########################## */
+
+@media only screen and (max-width: 700px) {
+  body {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

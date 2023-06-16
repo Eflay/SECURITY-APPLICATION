@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>File</title>
+<script src="{% static 'encryptFolder.js' %}"></script>
+<script src="{% static 'signFile.js' %}"></script>
+
+{% endblock head %} {% block content %}
+<h1>Create a file</h1>
+{% if accord %}
+<input id="accord" type="hidden" value="{{ accord.protected_symetric_key }}" />
+{% endif %}
+<form id="sign-form" class="form-to-complete" method="post" novalidate>
+  {{form.name.label_tag}}
+  {{ form.name }}
+  {{form.content.label_tag}}
+  {{ form.content }}
+  {{ form.patient_sign.as_hidden }}
+  {{ form.doctor_sign.as_hidden }}
+  {% csrf_token %}
+  <input type="file" accept=".txt" id="upload_file" name="filename">
+  <input class="btn-primary" type="submit" onclick="return encryptFolder('{{ user.role }}');" value="Create" />
+</form>
+<script>
+  document.getElementById('upload_file').addEventListener('change', async function (event) {
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+    var file = event.target.files[0];
+    var content = await readFileContent(file);
+
+
+
+    document.getElementById('id_name').value = file.name.substring(0, file.name.length - 4)
+    document.getElementById('id_content').value = content
+    // Faites ici ce que vous voulez avec le contenu du fichier
+  });
+
+  function readFileContent(file) {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        var arrayBuffer = event.target.result;
+        var uint8Array = new Uint8Array(arrayBuffer);
+        var content = new TextDecoder().decode(uint8Array);
+        resolve(content);
+      };
+
+      reader.onerror = function (event) {
+        reject(event.target.error);
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
+  }
+</script>
+{% endblock content %}

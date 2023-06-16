@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Register</title>
+{% endblock head %}
+
+{% block content %}
+
+<div class="register-container">
+    <h1>Register</h1>
+    <form id="registerForm" class="form-to-complete" method="post" novalidate>
+        {{ form }}
+        {% csrf_token %}
+        <input class="btn-primary" type="submit" value="Register" />
+    </form>
+</div>
+
+<script src="{% static 'register.js' %}"></script>
+
+{% endblock content %}

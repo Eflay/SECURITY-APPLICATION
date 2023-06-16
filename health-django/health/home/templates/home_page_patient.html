@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<title>Home</title>
+{% endblock head %} {% block content %}
+
+<h1>Home patient</h1>
+
+{% include 'messages.html' %}
+<div class="menu">
+  <a class="menu-btn" href="{% url 'folder' pat_id=user.id %}"> My Folder </a>
+  <a class="menu-btn" href="{% url 'patient' %}"> My Doctor </a>
+  <a class="menu-btn" href="{% url 'accord' %}"> Relationship Management </a>
+</div>
+
+<script>
+  loadCrypto(
+    "{{ user.public_key }}",
+    "{{ user.protected_private_key }}",
+    "{{ user.protected_symetric_key }}"
+  );
+</script>
+{% endblock content %}

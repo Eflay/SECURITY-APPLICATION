@@ -1,0 +1,74 @@
+version: '3.6'
+
+services:
+  nginx-rproxy:
+    image: 'jwilder/nginx-proxy'
+    container_name: nginx-rproxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-rproxy/certs:/etc/nginx/certs
+    networks:
+      - health-frontend
+  health-db:
+    image: postgres
+    container_name: health-db
+    restart: always
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    volumes:
+      - /srv/health-app/database:/var/lib/postgresql/data
+    networks:
+      - health-backend
+  health-django:
+    build: './health-django'
+    container_name: health-django
+    restart: always
+    environment:
+      - VIRTUAL_HOST=${WEB_HOST}
+      - WEB_HOST
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    depends_on:
+      - health-db
+    networks:
+      - health-frontend
+      - health-backend
+    volumes:
+      - /var/log/django:/usr/src/app/logs
+  #    logging:
+  #      driver: syslog
+  #      options:
+  #        syslog-tls-skip-verify: "true"
+  #        syslog-address: "tcp+tls://remote-log.xn--andr-epa.be"
+  #        syslog-format: "rfc3164"
+  #        tag: "health-django"
+
+  health-fail2ban:
+    image: crazymax/fail2ban:latest
+    container_name: fail2ban
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - "./data:/data"
+      - "/var/log/django:/var/log/django:ro"
+    environment:
+      - TZ=Europe/Brussels
+      - F2B_LOG_TARGET=STDOUT
+      - F2B_LOG_LEVEL=INFO
+      - F2B_DB_PURGE_AGE=1d
+    restart: always
+
+networks:
+  health-frontend:
+    name: health-frontend
+  health-backend:
+    name: health-backend

@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>Accord</title>
+{% endblock head %} {% block content %}
+
+<div class="register-container">
+  <h1>Accord</h1>
+  <h3>Êtes-vous sur de donner l'accès a {{ doctor.first_name }} {{ doctor.last_name }} ?</h3>
+  <p>{{ doctor.first_name }} {{ doctor.last_name }} ({{doctor.email}}) aura accès à tout votre dossier</p>
+  <p>L'empreinte de la clé publique de {{ doctor.first_name }} {{ doctor.last_name }} est :</p>
+  <p id="id_fingerprint"></p>
+  <form id="sign-form" class="register-form" method="post" novalidate>
+    {{ form.protected_symetric_key.as_hidden }}
+    {% csrf_token %}
+    <input type="submit" class="btn-primary" onclick="encryptSymetricKey('{{ doctor.public_key }}')" value="Confirm">
+  </form>
+</div>
+<script src="{% static 'accord.js' %}"></script>
+<script src="{% static 'pubKeyFingerprint.js' %}"></script>
+<script>window.onload = fingerprint('{{ doctor.public_key }}')</script>
+{% endblock content %}

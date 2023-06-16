@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block head %} {% load static %}
+<title>Patient Delete</title>
+{% endblock head %} {% block content %}
+
+<div class="register-container">
+  <h1>Patient</h1>
+  <h3>Êtes-vous sur de supprimer le patient {{ patient.first_name }} {{ patient.last_name }} ?</h3>
+  <p>{{ patient.first_name }} {{ patient.last_name }} ({{patient.email}}) n'aura plus acces au site</p>
+
+  <form
+  id="sign-form"
+  class="register-form"
+  method="post"
+  novalidate
+>
+  {% csrf_token %}
+  <button type="submit">Confirmer</button>
+</form>
+</div>
+{% endblock content %}
