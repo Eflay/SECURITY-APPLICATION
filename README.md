@@ -1,4 +1,4 @@
-# By Bettignies Edouard (40265) and Ensay Mery (44611)
+# By Ensay Mery, André Alexis, Delannoy Alexis, Michaux Clément, Castreuil Mateo and Bettigneis Edouard
 
 # SSD - HEALTH
 ![architecture](./archi.png)
