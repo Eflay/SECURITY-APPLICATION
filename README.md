@@ -1,4 +1,4 @@
-# By Ensay Mery, André Alexis, Delannoy Alexis, Michaux Clément, Castreuil Mateo and Bettigneis Edouard
+# By Ensay Mery, André Alexis, Delannoy Alexis, Michaux Clément, Castreuil Mateo and Bettignies Edouard
 
 # SSD - HEALTH
 ![architecture](./archi.png)
